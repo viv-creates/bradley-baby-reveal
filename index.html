@@ -214,9 +214,7 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
 .lang button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 body{position:relative}
 /* Chinese text: handwriting font has no Chinese glyphs, so size the fallback to match */
-html[lang^="zh"] .eyebrow{font-size:26px; font-weight:900; transform:rotate(-2deg)}
 html[lang^="zh"] h1 .coming{font-size:clamp(22px,5.6vw,30px); font-weight:900; margin-top:6px}
-html[lang^="zh"] h1 .shimmer{font-size:clamp(40px,10vw,68px); font-weight:900}
 html[lang^="zh"] .hint .mystery{font-size:17px; font-weight:700}
 html[lang^="zh"] #reveal .its{font-size:clamp(30px,7vw,44px); font-weight:900}
 html[lang^="zh"] #reveal .word{font-weight:900}
@@ -365,23 +363,23 @@ html[lang^="zh"] .sub{line-height:1.75}
       balloonMystery: "Mystery balloon", balloonAgain: "Tap to pop again",
     },
     zh: {
-      htmlLang: "zh-Hant", pageTitle: "Bradley 家寶寶性別揭曉",
-      eyebrow: '是<span class="b">男生</span>還是<span class="g">女生</span>？',
-      title: "Bradley 家寶寶 #1", coming: "即將在 2027 年 5 月報到",
+      htmlLang: "zh-Hant", pageTitle: "Baby Bradley 性別揭曉",
+      eyebrow: '<span class="b">Boy</span> or <span class="g">Girl</span>?',
+      title: "Baby Bradley #1", coming: "即將在 2027 年 5 月報到",
       demo: "示範模式：猜測只會存在這個瀏覽器裡。請在檔案最上方的設定中加入 Google Apps Script 網址，才能和大家分享猜測。",
       hintsTitle: "三個提示", guessTitle: "你的猜測", boardTitle: "大家的猜測",
       teamBoy: "💙 男生隊", teamGirl: "💗 女生隊", loading: "正在載入猜測…",
-      footer: "獻給 Julia、Jacob 和即將到來的小寶貝 🤍",
-      itsA: "寶寶是…", seeWho: "看看誰猜對了",
+      footer: "獻給 Julia、Jacob 和即將到來的 Baby 🤍",
+      itsA: "Baby 是…", seeWho: "看看誰猜對了",
       hints: [
-        { label: "Julia 的近況", tag: "老一輩的說法", text: "Julia 只有輕微孕吐……但是超級累！" },
-        { label: "Julia 的近況", tag: "老一輩的說法", text: "Julia 最近一直冒痘痘！" },
-        { label: "產檢的時候", tag: "胎心音", text: "寶寶的心跳每分鐘超過 170 下。" },
+        { label: "Julia 的近況", tag: "民間迷思", text: "Julia 只有輕微孕吐……但是超級累！" },
+        { label: "Julia 的近況", tag: "民間迷思", text: "Julia 最近一直冒痘痘！" },
+        { label: "產檢的時候", tag: "胎心音", text: "Baby 的心跳每分鐘超過 170 下。" },
       ],
       introBefore: P => `${P} 要當爸媽了！看看線索、投下你的猜測，並在<b>感恩節當天</b>回來戳破氣球。🦃`,
-      introReveal: (P, ready, mine) => `<b>倒數結束，揭曉時刻到了！🎉</b> ${P} 的寶寶就要揭曉，${ready ? "氣球已經可以戳破了" : "氣球隨時就能戳破了"}。` +
+      introReveal: (P, ready, mine) => `<b>倒數結束，揭曉時刻到了！🎉</b> ${P} 的 Baby 性別就要揭曉，${ready ? "氣球已經可以戳破了" : "氣球隨時就能戳破了"}。` +
         (mine ? "你的猜測已經送出，快去戳破氣球吧！🎈" : "還沒猜嗎？還來得及！看完線索並在下方送出你的猜測，<b>然後</b>再戳破氣球。🦃🎈"),
-      introAfter: (P, boy) => `${P} 的寶寶是<b>${boy ? "男生！💙" : "女生！💗"}</b> 謝謝大家陪我們一起猜！🦃`,
+      introAfter: (P, boy) => `${P} 的 Baby 是<b>${boy ? "男生！💙" : "女生！💗"}</b> 謝謝大家陪我們一起猜！🦃`,
       units: ["天", "小時", "分", "秒"],
       cdLabel: "距離感恩節大揭曉",
       revealDay: "<b>揭曉日到了！</b>氣球隨時可以戳破… 🎈",
@@ -402,7 +400,7 @@ html[lang^="zh"] .sub{line-height:1.75}
       beFirst: "搶先當第一個猜的人！", loadFail: "目前無法載入猜測，稍後會自動重試…",
       banner: (boy, w, n) => `是${boy ? "男生！💙" : "女生！💗"} &nbsp;·&nbsp; ${n} 人中有 ${w} 人猜對`,
       word: boy => boy ? "男生！" : "女生！",
-      tagline: "恭喜 Julia 和 Jacob！Bradley 家寶寶將在 2027 年 5 月報到。",
+      tagline: "恭喜 Julia 和 Jacob！Baby Bradley 將在 2027 年 5 月報到。",
       popAny: "🎈 點任何地方戳破氣球！", popGuessFirst: "🎈 先在下方猜，再點這裡戳破！",
       balloonMystery: "神秘氣球", balloonAgain: "再點一次戳破氣球",
     },
