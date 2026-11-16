@@ -1,7 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1E1712">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Baby Bradley Reveal</title>
 <meta name="description" content="Baby Bradley #1 is coming May 2027. Read the hints, cast your guess, and come back Thanksgiving Day to pop the balloon!">
@@ -45,6 +47,7 @@
   --shadow:0 10px 30px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
+:root[data-theme="dark"]{color-scheme:dark}
 html,body{margin:0; overflow-x:hidden}
 html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
 body{touch-action:manipulation; -webkit-tap-highlight-color:transparent}
@@ -194,7 +197,7 @@ textarea{resize:vertical; min-height:70px}
 
 /* Reveal overlay */
 #reveal{position:fixed; inset:0; display:none; place-items:center; text-align:center; z-index:20; pointer-events:none; padding:16px}
-#reveal.show{display:grid; background:rgba(251,245,236,.86); background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px)}
+#reveal.show{display:grid; background:rgba(30,23,18,.86); background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px)}
 #reveal .inner{animation:zoom .7s cubic-bezier(.2,1.4,.4,1) both}
 #reveal .its{font-family:Caveat,"Noto Sans TC",cursive; font-size:clamp(40px,9vw,60px); font-weight:700}
 #reveal .word{font-family:Fredoka,"Noto Sans TC",sans-serif; font-size:clamp(64px,20vw,150px); font-weight:800; line-height:1; text-shadow:0 6px 0 rgba(0,0,0,.08)}
