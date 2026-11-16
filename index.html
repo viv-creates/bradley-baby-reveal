@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baby Bradley Reveal</title>
+<meta name="description" content="Baby Bradley #1 is coming May 2027. Read the hints, cast your guess, and come back Thanksgiving Day to pop the balloon!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- ================= SETTINGS — edit these ================= -->
+<script>
+  const CONFIG = {
+    // Paste your Google Apps Script Web App URL here (see SETUP.md).
+    // Leave empty to run in local DEMO mode (guesses saved only in this browser).
+    SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxZVkdCCB944GFTUCHAmAemxH9k-wcwGwKLGvUVuqKVFcUw3XGdj6w2Eou4RmzPRL148Q/exec",
+
+    // Fallback reveal moment used for the countdown (the Google Sheet's
+    // "revealAt" value overrides this once connected). Thanksgiving 2026.
+    REVEAL_AT: "2026-11-26T16:00:00",
+
+    PARENTS: "Julia and Jacob",
+    DUE: "May 2027",
+  };
+</script>
+<style>
+:root{
+  --bg:#FBF5EC; --bg2:#F4E9D8; --card:#FFFDF9; --ink:#3B2A20; --muted:#7A6555;
+  --line:#E8DAC6; --accent:#C8743A; --accent-ink:#fff;
+  --girl:#E07A9B; --girl-soft:#FBE3EB; --boy:#5E9BD6; --boy-soft:#E1EEFA;
+  --balloon:#E8B85C; --balloon-dark:#C9933A; --shadow:0 10px 30px rgba(84,52,24,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1E1712; --bg2:#271E17; --card:#2B221B; --ink:#F6EBDD; --muted:#BFA992;
+    --line:#43352A; --accent:#E08A4C; --accent-ink:#1E1712;
+    --girl:#F08FB0; --girl-soft:#43283A; --boy:#7DB4EA; --boy-soft:#22344A;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1E1712; --bg2:#271E17; --card:#2B221B; --ink:#F6EBDD; --muted:#BFA992;
+  --line:#43352A; --accent:#E08A4C; --accent-ink:#1E1712;
+  --girl:#F08FB0; --girl-soft:#43283A; --boy:#7DB4EA; --boy-soft:#22344A;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0; overflow-x:hidden}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+body{touch-action:manipulation; -webkit-tap-highlight-color:transparent}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:Nunito,system-ui,sans-serif; font-size:17px; line-height:1.55;
+  background-image:radial-gradient(circle at 15% 0%, var(--bg2) 0, transparent 45%),
+                   radial-gradient(circle at 90% 10%, var(--bg2) 0, transparent 40%);
+  min-height:100vh; overflow-x:hidden;
+}
+h1,h2,h3{font-family:Fredoka,system-ui,sans-serif; line-height:1.15; margin:0}
+.wrap{position:relative; z-index:1; max-width:720px; margin:0 auto; padding:0 16px 64px}
+#bgfx{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+#bgfx .mini{position:absolute; bottom:-80px; border-radius:50% 50% 48% 48% / 55% 55% 45% 45%; opacity:.22;
+  animation-name:rise, sway; animation-timing-function:linear, ease-in-out; animation-iteration-count:infinite}
+#bgfx .mini::after{content:""; position:absolute; left:50%; top:100%; width:1px; height:34px; background:var(--muted); opacity:.6}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(-120vh)}}
+@keyframes sway{0%,100%{margin-left:-10px}50%{margin-left:10px}}
+#bgfx .spark{position:absolute; color:#F2C14E; animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0; transform:scale(.4)}50%{opacity:.8; transform:scale(1)}}
+.star{position:absolute; color:#F2C14E; animation:twinkle 2.6s ease-in-out infinite; pointer-events:none}
+.star.s1{left:calc(50% - 150px); top:40px; font-size:26px}
+.star.s2{left:calc(50% + 120px); top:70px; font-size:20px; animation-delay:-.8s}
+.star.s3{left:calc(50% - 120px); top:190px; font-size:16px; animation-delay:-1.5s}
+.star.s4{left:calc(50% + 140px); top:200px; font-size:24px; animation-delay:-2s}
+.star.s5{left:calc(50% + 70px); top:10px; font-size:14px; animation-delay:-1.1s}
+button{font:inherit; cursor:pointer}
+
+/* ---------- Balloon ---------- */
+.sky{position:relative; height:330px; display:flex; justify-content:center; align-items:flex-start; padding-top:18px}
+#balloon{-webkit-user-select:none; user-select:none; -webkit-touch-callout:none; width:190px; height:300px; animation:float 4.5s ease-in-out infinite; transform-origin:50% 90%; cursor:pointer; filter:drop-shadow(0 14px 18px rgba(84,52,24,.18))}
+#balloon.wiggle{animation:wiggle .5s ease}
+#balloon.ready{animation:float 2.2s ease-in-out infinite, pulse 1.4s ease-in-out infinite}
+#balloon.popping{animation:inflate .22s ease-in forwards}
+#balloon.gone{visibility:hidden}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+@keyframes pulse{0%,100%{filter:drop-shadow(0 14px 18px rgba(84,52,24,.18))}50%{filter:drop-shadow(0 0 22px rgba(232,184,92,.9))}}
+@keyframes inflate{to{transform:scale(1.25); opacity:.2}}
+.pop-hint{position:absolute; bottom:4px; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--bg);
+  padding:6px 14px; border-radius:999px; font-weight:800; font-size:14px; white-space:nowrap; display:none; animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(-50%,-4px)}}
+body.can-pop .pop-hint{display:block}
+body.can-pop{cursor:pointer}
+
+/* ---------- Header ---------- */
+header{text-align:center; margin-top:4px}
+.eyebrow{font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:13px; color:var(--accent)}
+.eyebrow{font-family:Caveat,cursive; font-size:34px; letter-spacing:0; text-transform:none; color:var(--ink); transform:rotate(-3deg); display:inline-block}
+.eyebrow .b{color:var(--boy)} .eyebrow .g{color:var(--girl)}
+h1{font-weight:700; margin:2px 0 12px; display:flex; flex-direction:column; align-items:center}
+h1 .shimmer{font-size:clamp(44px,11vw,76px); line-height:1.02;
+  background:linear-gradient(100deg, var(--boy) 0%, #9C8BE0 22%, var(--girl) 44%, #F2C14E 62%, var(--boy) 82%, var(--girl) 100%);
+  background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:shine 7s linear infinite; filter:drop-shadow(0 4px 0 rgba(84,52,24,.08))}
+h1 .coming{font-family:Caveat,cursive; font-size:clamp(30px,7vw,42px); color:var(--accent); transform:rotate(-2deg); margin-top:2px}
+@keyframes shine{to{background-position:-250% 0}}
+.sub{color:var(--muted); font-size:18px; margin:0}
+.countdown{display:flex; gap:10px; justify-content:center; margin:22px 0 6px; flex-wrap:wrap}
+.cd{position:relative; overflow:hidden; background:var(--card); border:1px solid var(--line); border-radius:16px; min-width:78px; padding:14px 8px 10px; box-shadow:var(--shadow)}
+.cd::before{content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg,var(--boy),var(--girl))}
+.cd b{display:block; font-family:Fredoka,sans-serif; font-size:34px; font-weight:700; line-height:1}
+.cd:last-child b{animation:tick 1s ease-in-out infinite}
+@keyframes tick{0%{transform:scale(1.15)}30%,100%{transform:scale(1)}}
+.cd span{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:700}
+.cd-label{color:var(--muted); font-size:15px; text-align:center}
+
+/* ---------- Sections ---------- */
+section{margin-top:40px}
+.sec-title{display:flex; align-items:baseline; gap:10px; margin-bottom:14px}
+.sec-title h2{font-size:30px; font-weight:700}
+.step{background:linear-gradient(135deg,var(--boy),var(--girl)); color:var(--accent-ink); width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:15px; flex:none; transform:translateY(-3px)}
+.card{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:var(--shadow)}
+
+/* Hints */
+.hints{display:grid; gap:12px}
+.hint{position:relative; overflow:hidden; background:var(--card); border:2px solid transparent;
+  background:linear-gradient(var(--card),var(--card)) padding-box, linear-gradient(120deg,var(--boy),var(--girl),#F2C14E) border-box;
+  transition:transform .2s ease, box-shadow .2s ease; border-radius:18px; padding:18px 20px; box-shadow:var(--shadow);
+  display:flex; gap:16px; align-items:center; min-height:88px}
+.hint:hover{transform:translateY(-3px) rotate(-.4deg); box-shadow:0 16px 34px rgba(84,52,24,.16)}
+.hint.locked{background:repeating-linear-gradient(-45deg, var(--card) 0 14px, var(--bg2) 14px 28px) padding-box, linear-gradient(120deg,var(--line),var(--line)) border-box}
+.hint.next{background:repeating-linear-gradient(-45deg, var(--card) 0 14px, var(--bg2) 14px 28px) padding-box, linear-gradient(120deg,var(--boy),var(--girl),#F2C14E) border-box; animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,88%,100%{transform:none}92%{transform:rotate(-1deg)}96%{transform:rotate(1deg)}}
+.hint .mystery{font-family:Caveat,cursive; font-size:24px; color:var(--muted); line-height:1.1}
+.hint .tag{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:var(--bg2); color:var(--accent); margin:2px 0 4px}
+.hint.open::after{content:""; position:absolute; inset:0; background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%); transform:translateX(-100%); animation:sweep 1.1s .1s ease-out forwards; pointer-events:none}
+@keyframes sweep{to{transform:translateX(100%)}}
+.hint .num{font-family:Fredoka,sans-serif; font-weight:700; font-size:40px; color:var(--accent); width:34px; flex:none; text-align:center}
+.hint .body{flex:1}
+.hint .label{font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--muted)}
+.hint .text{font-size:19px; font-weight:800}
+.hint .icon{font-size:34px; flex:none; animation:bounce 2.2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.hint.locked .text,.hint.locked .icon{display:none}
+.hint .reveal-btn{display:none}
+.hint.locked .reveal-btn{display:inline-block}
+.hint.next .reveal-btn{background:linear-gradient(90deg,var(--boy),var(--girl)); color:#fff; border:0; box-shadow:0 6px 16px rgba(224,122,155,.35)}
+.reveal-btn{margin-top:4px; background:transparent; color:var(--muted); border:1.5px dashed var(--line); padding:8px 14px; border-radius:999px; font-weight:800}
+.reveal-btn:disabled{cursor:not-allowed; opacity:.6}
+.hint.open{animation:flip .45s ease}
+@keyframes flip{from{transform:rotateX(70deg); opacity:.3}to{transform:none; opacity:1}}
+
+/* Guess form */
+.locked-note{color:var(--muted); text-align:center; padding:26px 10px; font-weight:700}
+form label{display:block; font-weight:800; font-size:14px; margin:0 0 6px}
+input[type=text],textarea{width:100%; font:inherit; color:var(--ink); background:var(--bg); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px}
+input[type=text]:focus,textarea:focus{outline:none; border-color:var(--accent)}
+textarea{resize:vertical; min-height:70px}
+.field{margin-bottom:16px}
+.picks{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.pick{border:2px solid var(--line); background:var(--bg); border-radius:16px; padding:16px 10px; text-align:center; font-weight:800; font-size:19px; color:var(--ink); transition:transform .15s}
+.pick .e{display:block; font-size:34px; margin-bottom:2px}
+.pick:hover{transform:translateY(-2px)}
+.pick[aria-pressed=true].boy{border-color:var(--boy); background:var(--boy-soft); animation:boing .45s ease}
+.pick[aria-pressed=true].girl{border-color:var(--girl); background:var(--girl-soft); animation:boing .45s ease}
+.pick[aria-pressed=true] .e{animation:bounce 1.2s ease-in-out infinite}
+@keyframes boing{0%{transform:scale(1)}40%{transform:scale(1.07)}70%{transform:scale(.97)}100%{transform:scale(1)}}
+.submit{width:100%; margin-top:4px; background:linear-gradient(90deg,var(--boy),var(--girl),var(--boy)); background-size:200% 100%; animation:shine 4s linear infinite; color:#fff; box-shadow:0 8px 20px rgba(224,122,155,.3); border:0; border-radius:14px; padding:15px; font-weight:800; font-size:18px}
+.submit:disabled{opacity:.5; cursor:not-allowed}
+.msg{margin-top:12px; font-weight:700; text-align:center; min-height:1.5em}
+.msg.err{color:#C0392B}
+.done-card{text-align:center}
+.done-card .big{font-family:Fredoka,sans-serif; font-size:26px; font-weight:800; margin:4px 0}
+
+/* Board */
+.tally{display:flex; justify-content:space-between; font-weight:800; margin-bottom:8px}
+.tally .b{color:var(--boy)} .tally .g{color:var(--girl)}
+.bar{position:relative; height:26px; border-radius:999px; overflow:hidden; display:flex; background:var(--line)}
+.bar i{display:block; height:100%; transition:width .8s cubic-bezier(.2,.8,.2,1);
+  background-image:repeating-linear-gradient(-45deg, rgba(255,255,255,.22) 0 10px, transparent 10px 20px) !important; background-size:28px 28px; animation:stripes 1s linear infinite}
+@keyframes stripes{to{background-position:28px 0}}
+.bar::after{content:"VS"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--card); color:var(--ink); font-family:Fredoka,sans-serif; font-weight:700; font-size:12px; padding:1px 7px; border-radius:999px; box-shadow:var(--shadow)}
+.bar .bb{background-color:var(--boy)} .bar .gg{background-color:var(--girl)}
+.cols{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px}
+.col h3{font-size:19px; margin-bottom:8px; display:flex; gap:6px; align-items:center}
+.col.boy h3{color:var(--boy)} .col.girl h3{color:var(--girl)}
+.guess{background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:9px 12px; margin-bottom:8px; word-wrap:break-word}
+.col.boy .guess{border-left:4px solid var(--boy)} .col.girl .guess{border-left:4px solid var(--girl)}
+.guess .n{font-weight:800}
+.guess .note{color:var(--muted); font-size:14.5px; font-style:italic}
+.guess.winner{box-shadow:0 0 0 2px gold inset}
+.guess.winner .n::after{content:" 🏆"}
+.empty{color:var(--muted); font-size:15px}
+.col.dim{opacity:.45}
+.status-line{color:var(--muted); font-size:13px; text-align:center; margin-top:12px}
+
+/* Reveal overlay */
+#reveal{position:fixed; inset:0; display:none; place-items:center; text-align:center; z-index:20; pointer-events:none; padding:16px}
+#reveal.show{display:grid; background:rgba(251,245,236,.86); background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px)}
+#reveal .inner{animation:zoom .7s cubic-bezier(.2,1.4,.4,1) both}
+#reveal .its{font-family:Caveat,cursive; font-size:clamp(40px,9vw,60px); font-weight:700}
+#reveal .word{font-family:Fredoka,sans-serif; font-size:clamp(64px,20vw,150px); font-weight:800; line-height:1; text-shadow:0 6px 0 rgba(0,0,0,.08)}
+#reveal .tagline{font-weight:800; font-size:18px; margin-top:10px}
+#reveal .close{pointer-events:auto; margin-top:22px; background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:10px 18px; font-weight:800}
+@keyframes zoom{from{transform:scale(.2); opacity:0}to{transform:none; opacity:1}}
+#confetti{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:25}
+.revealed-banner{display:none; margin:18px auto 0; text-align:center; padding:14px 18px; border-radius:16px; font-weight:800; font-size:18px}
+.demo{background:#FFF3C4; color:#5B4300; border-radius:12px; padding:10px 14px; font-size:14px; margin:14px 0 0; text-align:center}
+footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
+
+@media (max-width:520px){
+  .cols{grid-template-columns:1fr}
+  .tally{font-size:14px; white-space:nowrap; gap:8px}
+  .cd{min-width:64px}
+  .hint{padding:16px}
+}
+@media (prefers-reduced-motion: reduce){
+  #balloon,#balloon.ready,#bgfx .mini,.hint.next,.hint .icon,h1 .shimmer,.bar i,.submit{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="bgfx" aria-hidden="true"></div>
+<canvas id="confetti"></canvas>
+
+<div class="wrap">
+
+  <!-- Balloon -->
+  <div class="sky">
+    <span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span><span class="star s4">✧</span><span class="star s5">✦</span>
+    <svg id="balloon" viewBox="0 0 200 320" role="img" aria-label="Mystery balloon">
+      <defs>
+        <radialGradient id="shine" cx="35%" cy="30%" r="70%">
+          <stop offset="0" style="stop-color:#FFF3D1"/>
+          <stop offset=".45" style="stop-color:var(--balloon)"/>
+          <stop offset="1" style="stop-color:var(--balloon-dark)"/>
+        </radialGradient>
+      </defs>
+      <path d="M100 232 C 96 250, 108 262, 98 280 S 104 305, 100 318" style="fill:none;stroke:var(--muted);stroke-width:2"/>
+      <path d="M100 10 C 160 10, 192 60, 188 112 C 184 170, 140 220, 104 228 L 96 228 C 60 220, 16 170, 12 112 C 8 60, 40 10, 100 10 Z" fill="url(#shine)"/>
+      <path d="M92 228 L 108 228 L 112 238 L 88 238 Z" style="fill:var(--balloon-dark)"/>
+      <ellipse cx="62" cy="62" rx="16" ry="26" fill="#fff" opacity=".35" transform="rotate(-25 62 62)"/>
+      <text id="balloonMark" x="100" y="140" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="800" font-size="92" fill="#fff" opacity=".92">?</text>
+    </svg>
+    <div class="pop-hint">🎈 Tap anywhere to pop!</div>
+  </div>
+
+  <header>
+    <div class="eyebrow"><span class="b">Boy</span> or <span class="g">Girl</span>?</div>
+    <h1><span class="shimmer">Baby Bradley #1</span><span class="coming">is coming <span id="due"></span></span></h1>
+    <p class="sub" id="intro"></p>
+
+    <div id="countdownWrap">
+      <div class="countdown" id="countdown"></div>
+      <div class="cd-label" id="cdLabel">until the big reveal</div>
+    </div>
+    <div class="revealed-banner" id="revealedBanner"></div>
+    <div class="demo" id="demoNote" hidden>Demo mode — guesses are saved only in this browser. Add your Google Apps Script URL in the settings at the top of this file to share guesses with everyone.</div>
+  </header>
+
+  <!-- Hints -->
+  <section id="hintsSec">
+    <div class="sec-title"><div class="step">1</div><h2>Three hints</h2></div>
+    <div class="hints" id="hints"></div>
+  </section>
+
+  <!-- Guess -->
+  <section id="guessSec">
+    <div class="sec-title"><div class="step">2</div><h2>Make your guess</h2></div>
+    <div class="card" id="guessCard"></div>
+  </section>
+
+  <!-- Board -->
+  <section id="boardSec">
+    <div class="sec-title"><div class="step">3</div><h2>Everyone's guesses</h2></div>
+    <div class="card">
+      <div class="tally"><span class="b" id="tBoy">💙 Boy · 0</span><span class="g" id="tGirl">0 · Girl 💗</span></div>
+      <div class="bar"><i class="bb" id="barB" style="width:50%"></i><i class="gg" id="barG" style="width:50%"></i></div>
+      <div class="cols">
+        <div class="col boy" id="colBoy"><h3>💙 Team Boy</h3><div id="listBoy"></div></div>
+        <div class="col girl" id="colGirl"><h3>💗 Team Girl</h3><div id="listGirl"></div></div>
+      </div>
+      <div class="status-line" id="statusLine">Loading guesses…</div>
+    </div>
+  </section>
+
+  <footer>With love for Julia, Jacob &amp; the little one on the way 🤍</footer>
+</div>
+
+<div id="reveal" aria-live="assertive">
+  <div class="inner">
+    <div class="its">It's a…</div>
+    <div class="word" id="revealWord"></div>
+    <div class="tagline" id="revealTag"></div>
+    <button class="close" id="revealClose">See who guessed right</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const HINTS = [
+    { label: "How Julia's feeling", tag: "Old wives' tale", icon: "🤢😴", text: "Julia has only mild nausea… but she's VERY exhausted." },
+    { label: "How Julia's feeling", tag: "Old wives' tale", icon: "😬", text: "Julia has been dealing with breakouts!" },
+    { label: "At the doctor's office", tag: "Heartbeat", icon: "💓", text: "Baby's heart rate is over 170 bpm." },
+  ];
+  const qs = new URLSearchParams(location.search);
+  const PREVIEW = (qs.get("preview") || "").toLowerCase();   // ?preview=boy or ?preview=girl to test the pop
+  const DEMO = !CONFIG.SCRIPT_URL;
+  const LS = { hints: "bb1_hints", mine: "bb1_myguess", demo: "bb1_demo_guesses", popped: "bb1_popped" };
+  const mem = {}; // in-memory fallback when browser storage is blocked
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); if (v != null) return JSON.parse(v); } catch {} return k in mem ? mem[k] : d; },
+    set(k, v) { mem[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  };
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+  $("#due").textContent = CONFIG.DUE;
+  if (DEMO) $("#demoNote").hidden = false;
+
+  let state = { guesses: [], revealed: false, gender: "", revealAt: CONFIG.REVEAL_AT };
+  let hintsOpen = store.get(LS.hints, 0);
+  let pick = "";
+  let popped = false;
+
+  /* ---------------- Data layer ---------------- */
+  async function load() {
+    if (DEMO) {
+      state.guesses = store.get(LS.demo, null) ?? [
+        { name: "Grandma Sue", guess: "girl", note: "I just have a feeling!", ts: Date.now() - 86400000 },
+        { name: "Uncle Mike", guess: "boy", note: "Heart rate is a myth 😄", ts: Date.now() - 3600000 },
+      ];
+    } else {
+      const r = await fetch(CONFIG.SCRIPT_URL + "?action=state&t=" + Date.now());
+      const d = await r.json();
+      if (!d.ok) throw new Error(d.error || "Could not load");
+      state.guesses = d.guesses || [];
+      state.revealed = !!d.revealed;
+      state.gender = (d.gender || "").toLowerCase();
+      if (d.revealAt) state.revealAt = d.revealAt;
+    }
+    if (PREVIEW === "boy" || PREVIEW === "girl") { state.revealed = true; state.gender = PREVIEW; }
+  }
+
+  async function submitGuess(g) {
+    if (DEMO) {
+      const all = store.get(LS.demo, state.guesses);
+      all.push({ ...g, ts: Date.now() });
+      store.set(LS.demo, all);
+      return;
+    }
+    // text/plain avoids a CORS preflight, which Apps Script can't answer.
+    const r = await fetch(CONFIG.SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(g) });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || "Could not save your guess");
+  }
+
+  /* ---------------- Countdown ---------------- */
+  function updateIntro(timeUp) {
+    const P = esc(CONFIG.PARENTS);
+    let html;
+    if (state.revealed && popped) {
+      html = `${P} are expecting a baby <b>${state.gender === "boy" ? "boy! 💙" : "girl! 💗"}</b> Thank you all for guessing along with us. 🦃`;
+    } else if (state.revealed || timeUp) {
+      html = `<b>The countdown is over. It's reveal time! 🎉</b> ${P} are expecting, and ${state.revealed ? "the balloon is ready to pop" : "the balloon will be ready to pop any moment"}. ` +
+        (store.get(LS.mine, null) ? "Your guess is locked in. Go ahead and pop it! 🎈" : "Haven't guessed yet? There's still time: read the clues and lock in your guess below <b>before</b> you pop the balloon. 🦃🎈");
+    } else {
+      html = `${P} are expecting! Read the clues, cast your guess, and come back on <b>Thanksgiving Day</b> to pop the balloon. 🦃`;
+    }
+    const el = $("#intro");
+    if (el.innerHTML !== html) el.innerHTML = html;
+  }
+
+  function tickCountdown() {
+    const target = new Date(state.revealAt).getTime();
+    const diff = target - Date.now();
+    updateIntro(isNaN(target) || diff <= 0);
+    const wrap = $("#countdownWrap");
+    if (state.revealed) { wrap.hidden = true; return; }
+    wrap.hidden = false;
+    if (isNaN(target) || diff <= 0) {
+      $("#countdown").innerHTML = "";
+      $("#cdLabel").innerHTML = "<b>It's reveal day!</b> The balloon will be ready to pop any moment… 🎈";
+      return;
+    }
+    const d = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60, s = Math.floor(diff / 1e3) % 60;
+    $("#countdown").innerHTML = [[d,"days"],[h,"hours"],[m,"mins"],[s,"secs"]]
+      .map(([v,l]) => `<div class="cd"><b>${String(v).padStart(2,"0")}</b><span>${l}</span></div>`).join("");
+    $("#cdLabel").textContent = "until the big reveal on Thanksgiving Day";
+  }
+
+  /* ---------------- Hints ---------------- */
+  let hintsKey = "";
+  function renderHints() {
+    const key = hintsOpen + "|" + (state.revealed && popped);
+    if (key === hintsKey) return;
+    hintsKey = key;
+    $("#hints").innerHTML = HINTS.map((h, i) => {
+      const open = i < hintsOpen || (state.revealed && popped);
+      const cls = open ? "open" : (i === hintsOpen ? "locked next" : "locked");
+      return `<div class="hint ${cls}" data-i="${i}">
+        <div class="num">${i + 1}</div>
+        <div class="body">
+          <div class="label">Hint ${i + 1}${open ? " · " + esc(h.label) : ""}</div>${open ? `<span class="tag">${esc(h.tag)}</span>` : `<div class="mystery">Top secret clue…</div>`}
+          <div class="text">${esc(h.text)}</div>
+          <button class="reveal-btn" data-i="${i}" ${i === hintsOpen ? "" : "disabled"}>${i === hintsOpen ? "Reveal hint ✨" : "🔒 Unlock hint " + i + " first"}</button>
+        </div>
+        <div class="icon">${h.icon}</div>
+      </div>`;
+    }).join("");
+    $("#hints").querySelectorAll(".reveal-btn").forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const r = b.getBoundingClientRect();
+      burst(r.left + r.width / 2, r.top + r.height / 2, 70, "gold");
+      hintsOpen = Math.max(hintsOpen, +b.dataset.i + 1);
+      store.set(LS.hints, hintsOpen);
+      renderHints(); renderGuess();
+    });
+  }
+
+  /* ---------------- Guess form ---------------- */
+  function renderGuess() {
+    const card = $("#guessCard");
+    const mine = store.get(LS.mine, null);
+    if (state.revealed && popped) {
+      card.innerHTML = `<div class="done-card"><div class="big">Guessing is closed!</div>
+        <div>${mine ? `You guessed <b>${mine.guess === "boy" ? "Boy 💙" : "Girl 💗"}</b>.` : "Thanks for playing along."}</div></div>`;
+      return;
+    }
+    if (mine) {
+      card.innerHTML = `<div class="done-card"><div style="font-size:40px">${mine.guess === "boy" ? "💙" : "💗"}</div>
+        <div class="big">You're on Team ${mine.guess === "boy" ? "Boy" : "Girl"}, ${esc(mine.name)}!</div>
+        <div style="color:var(--muted)">${state.revealed ? "The balloon is ready. Tap it to find out if you were right! 🎈" : "Come back on Thanksgiving Day to pop the balloon and see if you were right."}</div></div>`;
+      return;
+    }
+    if (hintsOpen < HINTS.length) {
+      card.innerHTML = `<div class="locked-note">🔒 Reveal all three hints to unlock your guess<br><span style="font-weight:600">(${hintsOpen} of ${HINTS.length} revealed)</span></div>`;
+      return;
+    }
+    if ($("#gform")) return; // keep whatever the guest has typed/picked so far
+    card.innerHTML = `<form id="gform" novalidate>
+      <div class="field"><label for="gname">Your name</label>
+        <input type="text" id="gname" maxlength="60" placeholder="e.g. Aunt Linda" autocomplete="name" required></div>
+      <div class="field"><label>I think it's a…</label>
+        <div class="picks">
+          <button type="button" class="pick boy" data-v="boy" aria-pressed="false"><span class="e">💙</span>Boy</button>
+          <button type="button" class="pick girl" data-v="girl" aria-pressed="false"><span class="e">💗</span>Girl</button>
+        </div></div>
+      <div class="field"><label for="gnote">A note for Julia &amp; Jacob <span style="font-weight:600;color:var(--muted)">(optional)</span></label>
+        <textarea id="gnote" maxlength="240" placeholder="Why do you think so? Name ideas? Well wishes?"></textarea></div>
+      <button class="submit" id="gsubmit" type="submit">Lock in my guess</button>
+      <div class="msg" id="gmsg"></div>
+    </form>`;
+    card.querySelectorAll(".pick").forEach(b => b.onclick = () => {
+      pick = b.dataset.v;
+      card.querySelectorAll(".pick").forEach(x => x.setAttribute("aria-pressed", x === b));
+    });
+    $("#gform").onsubmit = async e => {
+      e.preventDefault();
+      const name = $("#gname").value.trim(), note = $("#gnote").value.trim(), msg = $("#gmsg");
+      msg.className = "msg err";
+      if (!name) { msg.textContent = "Please add your name."; return; }
+      if (!pick) { msg.textContent = "Pick Boy or Girl!"; return; }
+      const btn = $("#gsubmit"); btn.disabled = true; btn.textContent = "Saving…"; msg.textContent = "";
+      try {
+        await submitGuess({ name, guess: pick, note });
+        store.set(LS.mine, { name, guess: pick });
+        await refresh();
+        miniBurst(pick);
+      } catch (err) {
+        msg.textContent = "Hmm, that didn't save. Please try again. (" + err.message + ")";
+        btn.disabled = false; btn.textContent = "Lock in my guess";
+      }
+    };
+  }
+
+  /* ---------------- Board ---------------- */
+  function renderBoard() {
+    const gs = [...state.guesses].sort((a, b) => (b.ts || 0) - (a.ts || 0));
+    const boys = gs.filter(g => g.guess === "boy"), girls = gs.filter(g => g.guess === "girl");
+    const total = boys.length + girls.length;
+    const pb = total ? Math.round(boys.length / total * 100) : 50;
+    $("#barB").style.width = pb + "%"; $("#barG").style.width = (100 - pb) + "%";
+    $("#tBoy").textContent = `💙 Boy · ${boys.length}${total ? " (" + pb + "%)" : ""}`;
+    $("#tGirl").textContent = `${total ? "(" + (100 - pb) + "%) " : ""}${girls.length} · Girl 💗`;
+    const showWin = state.revealed && popped;
+    const item = (g, team) => `<div class="guess ${showWin && state.gender === team ? "winner" : ""}">
+      <div class="n">${esc(g.name)}</div>${g.note ? `<div class="note">“${esc(g.note)}”</div>` : ""}</div>`;
+    $("#listBoy").innerHTML = boys.map(g => item(g, "boy")).join("") || `<div class="empty">No guesses yet</div>`;
+    $("#listGirl").innerHTML = girls.map(g => item(g, "girl")).join("") || `<div class="empty">No guesses yet</div>`;
+    $("#colBoy").classList.toggle("dim", showWin && state.gender !== "boy");
+    $("#colGirl").classList.toggle("dim", showWin && state.gender !== "girl");
+    $("#statusLine").textContent = total
+      ? `${total} guess${total === 1 ? "" : "es"} so far${DEMO ? " (demo)" : ""} · updates automatically`
+      : "Be the first to guess!";
+  }
+
+  /* ---------------- Reveal / pop ---------------- */
+  function renderRevealState() {
+    const ready = state.revealed && !popped;
+    document.body.classList.toggle("can-pop", ready);
+    $("#balloon").classList.toggle("ready", ready);
+    const ban = $("#revealedBanner");
+    if (state.revealed && popped) {
+      const boyC = state.gender === "boy";
+      document.documentElement.style.setProperty("--balloon", boyC ? "#8EC1EE" : "#F4A6C0");
+      document.documentElement.style.setProperty("--balloon-dark", boyC ? "#5E9BD6" : "#E07A9B");
+      $("#balloonMark").textContent = "♥";
+      $("#balloon").setAttribute("aria-label", "Tap to pop again");
+      const boy = state.gender === "boy";
+      ban.style.display = "block";
+      ban.style.background = boy ? "var(--boy-soft)" : "var(--girl-soft)";
+      ban.style.color = boy ? "var(--boy)" : "var(--girl)";
+      const winners = state.guesses.filter(g => g.guess === state.gender).length;
+      ban.innerHTML = `It's a ${boy ? "Boy! 💙" : "Girl! 💗"} &nbsp;·&nbsp; ${winners} of ${state.guesses.length} guessed right`;
+    } else ban.style.display = "none";
+  }
+
+  function pop() {
+    if (!state.revealed || popped) return;
+    popped = true;
+    if (!PREVIEW) store.set(LS.popped, true);
+    try { navigator.vibrate && navigator.vibrate([40, 30, 80]); } catch {}
+    const b = $("#balloon");
+    b.classList.remove("ready"); b.classList.add("popping");
+    setTimeout(() => {
+      b.classList.add("gone");
+      const r = b.getBoundingClientRect();
+      const boy = state.gender === "boy";
+      burst(r.left + r.width / 2, r.top + r.height * 0.35, 260, boy);
+      rain(boy);
+      $("#revealWord").textContent = boy ? "BOY!" : "GIRL!";
+      $("#revealWord").style.color = boy ? "var(--boy)" : "var(--girl)";
+      $("#revealTag").textContent = `Congratulations, Julia & Jacob! Baby Bradley arrives ${CONFIG.DUE}.`;
+      $("#reveal").classList.add("show");
+      renderRevealState(); renderBoard(); renderHints(); renderGuess(); updateIntro(true);
+      setTimeout(() => { b.classList.remove("popping", "gone"); b.style.opacity = 1; }, 4500);
+    }, 220);
+  }
+  function handleTap(target) {
+    if (!(target instanceof Element)) target = document.body;
+    const onBalloon = !!target.closest("#balloon");
+    if (state.revealed && !popped) {
+      if (target.closest("input, textarea, select, button, a, #reveal")) return;
+      // Late guessers need to use the hints and form without popping by accident.
+      if (!onBalloon && !store.get(LS.mine, null) && target.closest("#hintsSec, #guessSec")) return;
+      pop(); return;
+    }
+    if (state.revealed && popped && onBalloon) { popped = false; pop(); return; } // replay
+    if (onBalloon) { const b = $("#balloon"); b.classList.remove("wiggle"); void b.offsetWidth; b.classList.add("wiggle"); setTimeout(() => b.classList.remove("wiggle"), 500); }
+  }
+  // Phones: iOS Safari often doesn't send "click" to the page for taps on plain
+  // (non-button) areas, so taps are detected with pointer events. A finger that
+  // moves (scrolling) or is held down doesn't count as a tap.
+  let down = null, lastTap = 0;
+  addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, t: Date.now() }; }, { passive: true });
+  addEventListener("pointercancel", () => { down = null; }, { passive: true });
+  addEventListener("pointerup", e => {
+    if (!down) return;
+    const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y), held = Date.now() - down.t;
+    down = null;
+    if (moved < 14 && held < 900) { lastTap = Date.now(); handleTap(e.target); }
+  }, { passive: true });
+  // Older browsers / keyboard: fall back to click, ignoring the click that follows a handled tap.
+  document.addEventListener("click", e => { if (Date.now() - lastTap > 800) handleTap(e.target); });
+  $("#revealClose").onclick = e => {
+    e.stopPropagation();
+    $("#reveal").classList.remove("show");
+    $("#boardSec").scrollIntoView({ behavior: "smooth" });
+  };
+
+  /* ---------------- Confetti ---------------- */
+  const cv = $("#confetti"), ctx = cv.getContext("2d");
+  let parts = [], running = false;
+  function size() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+  addEventListener("resize", size); size();
+  const palette = boy => boy === "gold" ? ["#F2C14E","#FFE08A","#E8A23A","#ffffff","#F49A6B"] : boy === "mix" ? ["#5E9BD6","#8EC1EE","#E07A9B","#F4A6C0","#F2C14E"] : boy ? ["#5E9BD6","#8EC1EE","#BFDDF7","#ffffff","#3D7CC0"] : ["#E07A9B","#F4A6C0","#FAD0DE","#ffffff","#C9527A"];
+  function add(x, y, vx, vy, boy) {
+    const c = palette(boy);
+    parts.push({ x, y, vx, vy, r: 4 + Math.random() * 6, rot: Math.random() * 6, vr: (Math.random() - .5) * .3,
+      c: c[Math.random() * c.length | 0], shape: Math.random() < .25 ? "heart" : Math.random() < .5 ? "circle" : "rect", life: 1 });
+  }
+  function burst(x, y, n, boy) {
+    for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, s = 3 + Math.random() * 11; add(x, y, Math.cos(a) * s, Math.sin(a) * s - 3, boy); }
+    loop();
+  }
+  function rain(boy) {
+    let t = 0; const id = setInterval(() => { for (let i = 0; i < 8; i++) add(Math.random() * innerWidth, -10, (Math.random() - .5) * 2, 2 + Math.random() * 3, boy); loop(); if (++t > 60) clearInterval(id); }, 60);
+  }
+  function miniBurst(team) { burst(innerWidth / 2, innerHeight / 2, 120, team === "boy"); }
+  function heart(x, y, r) { ctx.beginPath(); ctx.moveTo(0, r * .3); ctx.bezierCurveTo(-r, -r * .6, -r * .4, -r * 1.2, 0, -r * .45); ctx.bezierCurveTo(r * .4, -r * 1.2, r, -r * .6, 0, r * .3); ctx.fill(); }
+  function loop() {
+    if (running) return; running = true;
+    (function f() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      parts = parts.filter(p => p.y < innerHeight + 30 && p.life > 0);
+      for (const p of parts) {
+        p.vy += .18; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= .002;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.c; ctx.globalAlpha = Math.min(1, p.life * 2);
+        if (p.shape === "circle") { ctx.beginPath(); ctx.arc(0, 0, p.r / 2, 0, 7); ctx.fill(); }
+        else if (p.shape === "heart") heart(0, 0, p.r * 1.3);
+        else ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2);
+        ctx.restore();
+      }
+      if (parts.length) requestAnimationFrame(f); else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+    })();
+  }
+
+  /* ---------------- Background balloons & sparkles ---------------- */
+  (function bg() {
+    const layer = $("#bgfx"), cols = ["var(--boy)", "var(--girl)", "#F2C14E"];
+    for (let i = 0; i < 16; i++) {
+      const el = document.createElement("i");
+      el.className = "mini";
+      const sz = 22 + Math.random() * 30;
+      el.style.cssText = `left:${Math.random() * 100}%; width:${sz}px; height:${sz * 1.2}px; background:${cols[i % 3]};
+        animation-duration:${16 + Math.random() * 16}s, ${3 + Math.random() * 3}s; animation-delay:${-Math.random() * 30}s, ${-Math.random() * 3}s;`;
+      layer.appendChild(el);
+    }
+    for (let i = 0; i < 22; i++) {
+      const sp = document.createElement("b");
+      sp.className = "spark"; sp.textContent = Math.random() < .5 ? "✦" : "·";
+      sp.style.cssText = `left:${Math.random() * 100}%; top:${Math.random() * 100}%; font-size:${8 + Math.random() * 14}px; animation-delay:${-Math.random() * 4}s; animation-duration:${2 + Math.random() * 3}s`;
+      layer.appendChild(sp);
+    }
+  })();
+
+  /* ---------------- Boot ---------------- */
+  async function refresh() {
+    let failed = null;
+    try { await load(); }
+    catch (err) { failed = err; console.error("Loading guesses failed:", err); }
+    if (state.revealed && !PREVIEW && store.get(LS.popped, false)) popped = true;
+    renderHints(); renderGuess(); renderBoard(); renderRevealState(); tickCountdown();
+    $(".pop-hint").textContent = store.get(LS.mine, null) ? "🎈 Tap anywhere to pop!" : "🎈 Guess below first, then tap here to pop!";
+    if (failed) $("#statusLine").textContent = "Couldn't load guesses right now. Retrying soon…";
+  }
+  tickCountdown();
+  refresh();
+  setInterval(tickCountdown, 1000);
+  setInterval(() => { if (!document.hidden) refresh(); }, 30000);
+  // Phones pause pages in the background; check right away when the guest comes back.
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+  addEventListener("pageshow", e => { if (e.persisted) refresh(); });
+})();
+</script>
+</body>
+</html>
