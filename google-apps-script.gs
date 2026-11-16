@@ -27,7 +27,7 @@ function setup() {
   if (c.getLastRow() === 0) {
     c.getRange('A1:C1').setValues([['Setting', 'Value', 'Notes']]).setFontWeight('bold');
     c.getRange('A2:C4').setValues([
-      ['revealAt', new Date('2026-11-26T16:00:00'), 'Date/time the reveal goes live (sheet time zone).'],
+      ['revealAt', new Date('2026-11-27T16:00:00'), 'Date/time the reveal goes live (sheet time zone).'],
       ['gender', '', 'Type boy or girl. Leave blank until you know — reveal will not happen while blank.'],
       ['revealNow', false, 'Set TRUE to reveal immediately (overrides revealAt). Needs gender filled in.'],
     ]);

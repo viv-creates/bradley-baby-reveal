@@ -34,7 +34,7 @@ Send that link to friends and family.
 
 | Setting | What it does |
 |---|---|
-| `revealAt` | When the reveal goes live. Default is Thanksgiving, Nov 26 2026 at 4:00 PM in the Sheet's time zone. Anyone who hasn't guessed yet can still guess before they pop the balloon. |
+| `revealAt` | When the reveal goes live. Default is the day after Thanksgiving, Fri Nov 27 2026 at 4:00 PM in the Sheet's time zone. Anyone who hasn't guessed yet can still guess before they pop the balloon. |
 | `gender` | Type `boy` or `girl`. **Only the Sheet knows this.** It is never in the HTML, so nobody can find it in the page source. |
 | `revealNow` | Set to `TRUE` to reveal right away, for example when everyone is around the table. |
 

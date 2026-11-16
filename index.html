@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1E1712">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Baby Bradley Reveal</title>
-<meta name="description" content="Baby Bradley #1 is coming May 2027. Read the hints, cast your guess, and come back Thanksgiving Day to pop the balloon!">
+<meta name="description" content="Baby Bradley #1 is coming May 2027. Read the hints, cast your guess, and come back the day after Thanksgiving to pop the balloon!">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -18,8 +18,8 @@
     SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxZVkdCCB944GFTUCHAmAemxH9k-wcwGwKLGvUVuqKVFcUw3XGdj6w2Eou4RmzPRL148Q/exec",
 
     // Fallback reveal moment used for the countdown (the Google Sheet's
-    // "revealAt" value overrides this once connected). Thanksgiving 2026.
-    REVEAL_AT: "2026-11-26T16:00:00",
+    // "revealAt" value overrides this once connected). Day after Thanksgiving 2026.
+    REVEAL_AT: "2026-11-27T16:00:00",
 
     PARENTS: "Julia and Jacob",
     DUE: "May 2027",
@@ -337,18 +337,18 @@ html[lang^="zh"] .sub{line-height:1.75}
         { label: "How Julia's feeling", tag: "Old wives' tale", text: "Julia has been dealing with breakouts!" },
         { label: "At the doctor's office", tag: "Heartbeat", text: "Baby's heart rate is over 170 bpm." },
       ],
-      introBefore: P => `${P} are expecting! Read the clues, cast your guess, and come back on <b>Thanksgiving Day</b> to pop the balloon. 🦃`,
+      introBefore: P => `${P} are expecting! Read the clues, cast your guess, and come back on <b>Friday, Nov 27</b> (the day after Thanksgiving) to pop the balloon. 🦃`,
       introReveal: (P, ready, mine) => `<b>The countdown is over. It's reveal time! 🎉</b> ${P} are expecting, and ${ready ? "the balloon is ready to pop" : "the balloon will be ready to pop any moment"}. ` +
         (mine ? "Your guess is locked in. Go ahead and pop it! 🎈" : "Haven't guessed yet? There's still time: read the clues and lock in your guess below <b>before</b> you pop the balloon. 🦃🎈"),
       introAfter: (P, boy) => `${P} are expecting a baby <b>${boy ? "boy! 💙" : "girl! 💗"}</b> Thank you all for guessing along with us. 🦃`,
       units: ["days", "hours", "mins", "secs"],
-      cdLabel: "until the big reveal on Thanksgiving Day",
+      cdLabel: "until the big reveal on Friday, Nov 27",
       revealDay: "<b>It's reveal day!</b> The balloon will be ready to pop any moment… 🎈",
       hintN: n => `Hint ${n}`, mystery: "Top secret clue…", revealHint: "Reveal hint ✨", unlockFirst: n => `🔒 Unlock hint ${n} first`,
       closed: "Guessing is closed!", youGuessed: boy => `You guessed <b>${boy ? "Boy 💙" : "Girl 💗"}</b>.`, thanks: "Thanks for playing along.",
       onTeam: (boy, name) => `You're on Team ${boy ? "Boy" : "Girl"}, ${name}!`,
       readyTap: "The balloon is ready. Tap it to find out if you were right! 🎈",
-      comeBack: "Come back on Thanksgiving Day to pop the balloon and see if you were right.",
+      comeBack: "Come back on Friday, Nov 27 (the day after Thanksgiving) to pop the balloon and see if you were right.",
       lockedNote: (n, t) => `🔒 Reveal all three hints to unlock your guess<br><span style="font-weight:600">(${n} of ${t} revealed)</span>`,
       yourName: "Your name", namePh: "e.g. Aunt Linda", iThink: "I think it's a…", boy: "Boy", girl: "Girl",
       noteLabel: 'A note for Julia &amp; Jacob <span style="font-weight:600;color:var(--muted)">(optional)</span>',
@@ -379,18 +379,18 @@ html[lang^="zh"] .sub{line-height:1.75}
         { label: "Julia 的近況", tag: "民間迷思", text: "Julia 最近一直冒痘痘！" },
         { label: "產檢的時候", tag: "胎心音", text: "Baby 的心跳每分鐘超過 170 下。" },
       ],
-      introBefore: P => `${P} 要當爸媽了！看看線索、投下你的猜測，並在<b>感恩節當天</b>回來戳破氣球。🦃`,
+      introBefore: P => `${P} 要當爸媽了！看看線索、投下你的猜測，並在<b>感恩節隔天（11 月 27 日，星期五）</b>回來戳破氣球。🦃`,
       introReveal: (P, ready, mine) => `<b>倒數結束，揭曉時刻到了！🎉</b> ${P} 的 Baby 性別就要揭曉，${ready ? "氣球已經可以戳破了" : "氣球隨時就能戳破了"}。` +
         (mine ? "你的猜測已經送出，快去戳破氣球吧！🎈" : "還沒猜嗎？還來得及！看完線索並在下方送出你的猜測，<b>然後</b>再戳破氣球。🦃🎈"),
       introAfter: (P, boy) => `${P} 的 Baby 是<b>${boy ? "男生！💙" : "女生！💗"}</b> 謝謝大家陪我們一起猜！🦃`,
       units: ["天", "小時", "分", "秒"],
-      cdLabel: "距離感恩節大揭曉",
+      cdLabel: "距離 11 月 27 日大揭曉",
       revealDay: "<b>揭曉日到了！</b>氣球隨時可以戳破… 🎈",
       hintN: n => `提示 ${n}`, mystery: "神秘線索…", revealHint: "揭開提示 ✨", unlockFirst: n => `🔒 請先揭開提示 ${n}`,
       closed: "猜測已經截止！", youGuessed: boy => `你猜的是<b>${boy ? "男生 💙" : "女生 💗"}</b>。`, thanks: "謝謝你一起同樂！",
       onTeam: (boy, name) => `${name}，你是${boy ? "男生" : "女生"}隊！`,
       readyTap: "氣球準備好了，點一下看看你猜對了沒！🎈",
-      comeBack: "感恩節當天回來戳破氣球，看看你猜對了沒！",
+      comeBack: "感恩節隔天（11 月 27 日）回來戳破氣球，看看你猜對了沒！",
       lockedNote: (n, t) => `🔒 揭開三個提示後就能猜囉<br><span style="font-weight:600">（已揭開 ${n} / ${t}）</span>`,
       yourName: "你的名字", namePh: "例如：Linda 阿姨", iThink: "我猜是…", boy: "男生", girl: "女生",
       noteLabel: '想對 Julia 和 Jacob 說的話 <span style="font-weight:600;color:var(--muted)">（選填）</span>',
