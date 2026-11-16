@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Baby Bradley Reveal</title>
 <meta name="description" content="Baby Bradley #1 is coming May 2027. Read the hints, cast your guess, and come back Thanksgiving Day to pop the balloon!">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <!-- ================= SETTINGS — edit these ================= -->
 <script>
   const CONFIG = {
@@ -50,12 +50,12 @@ html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
 body{touch-action:manipulation; -webkit-tap-highlight-color:transparent}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:Nunito,system-ui,sans-serif; font-size:17px; line-height:1.55;
+  font-family:Nunito,"Noto Sans TC",system-ui,sans-serif; font-size:17px; line-height:1.55;
   background-image:radial-gradient(circle at 15% 0%, var(--bg2) 0, transparent 45%),
                    radial-gradient(circle at 90% 10%, var(--bg2) 0, transparent 40%);
   min-height:100vh; overflow-x:hidden;
 }
-h1,h2,h3{font-family:Fredoka,system-ui,sans-serif; line-height:1.15; margin:0}
+h1,h2,h3{font-family:Fredoka,"Noto Sans TC",system-ui,sans-serif; line-height:1.15; margin:0}
 .wrap{position:relative; z-index:1; max-width:720px; margin:0 auto; padding:0 16px 64px}
 #bgfx{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
 #bgfx .mini{position:absolute; bottom:-80px; border-radius:50% 50% 48% 48% / 55% 55% 45% 45%; opacity:.22;
@@ -93,20 +93,20 @@ body.can-pop{cursor:pointer}
 /* ---------- Header ---------- */
 header{text-align:center; margin-top:4px}
 .eyebrow{font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:13px; color:var(--accent)}
-.eyebrow{font-family:Caveat,cursive; font-size:34px; letter-spacing:0; text-transform:none; color:var(--ink); transform:rotate(-3deg); display:inline-block}
+.eyebrow{font-family:Caveat,"Noto Sans TC",cursive; font-size:34px; letter-spacing:0; text-transform:none; color:var(--ink); transform:rotate(-3deg); display:inline-block}
 .eyebrow .b{color:var(--boy)} .eyebrow .g{color:var(--girl)}
 h1{font-weight:700; margin:2px 0 12px; display:flex; flex-direction:column; align-items:center}
 h1 .shimmer{font-size:clamp(44px,11vw,76px); line-height:1.02;
   background:linear-gradient(100deg, var(--boy) 0%, #9C8BE0 22%, var(--girl) 44%, #F2C14E 62%, var(--boy) 82%, var(--girl) 100%);
   background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
   animation:shine 7s linear infinite; filter:drop-shadow(0 4px 0 rgba(84,52,24,.08))}
-h1 .coming{font-family:Caveat,cursive; font-size:clamp(30px,7vw,42px); color:var(--accent); transform:rotate(-2deg); margin-top:2px}
+h1 .coming{font-family:Caveat,"Noto Sans TC",cursive; font-size:clamp(30px,7vw,42px); color:var(--accent); transform:rotate(-2deg); margin-top:2px}
 @keyframes shine{to{background-position:-250% 0}}
 .sub{color:var(--muted); font-size:18px; margin:0}
 .countdown{display:flex; gap:10px; justify-content:center; margin:22px 0 6px; flex-wrap:wrap}
 .cd{position:relative; overflow:hidden; background:var(--card); border:1px solid var(--line); border-radius:16px; min-width:78px; padding:14px 8px 10px; box-shadow:var(--shadow)}
 .cd::before{content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg,var(--boy),var(--girl))}
-.cd b{display:block; font-family:Fredoka,sans-serif; font-size:34px; font-weight:700; line-height:1}
+.cd b{display:block; font-family:Fredoka,"Noto Sans TC",sans-serif; font-size:34px; font-weight:700; line-height:1}
 .cd:last-child b{animation:tick 1s ease-in-out infinite}
 @keyframes tick{0%{transform:scale(1.15)}30%,100%{transform:scale(1)}}
 .cd span{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:700}
@@ -129,11 +129,11 @@ section{margin-top:40px}
 .hint.locked{background:repeating-linear-gradient(-45deg, var(--card) 0 14px, var(--bg2) 14px 28px) padding-box, linear-gradient(120deg,var(--line),var(--line)) border-box}
 .hint.next{background:repeating-linear-gradient(-45deg, var(--card) 0 14px, var(--bg2) 14px 28px) padding-box, linear-gradient(120deg,var(--boy),var(--girl),#F2C14E) border-box; animation:nudge 2.4s ease-in-out infinite}
 @keyframes nudge{0%,88%,100%{transform:none}92%{transform:rotate(-1deg)}96%{transform:rotate(1deg)}}
-.hint .mystery{font-family:Caveat,cursive; font-size:24px; color:var(--muted); line-height:1.1}
+.hint .mystery{font-family:Caveat,"Noto Sans TC",cursive; font-size:24px; color:var(--muted); line-height:1.1}
 .hint .tag{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:var(--bg2); color:var(--accent); margin:2px 0 4px}
 .hint.open::after{content:""; position:absolute; inset:0; background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%); transform:translateX(-100%); animation:sweep 1.1s .1s ease-out forwards; pointer-events:none}
 @keyframes sweep{to{transform:translateX(100%)}}
-.hint .num{font-family:Fredoka,sans-serif; font-weight:700; font-size:40px; color:var(--accent); width:34px; flex:none; text-align:center}
+.hint .num{font-family:Fredoka,"Noto Sans TC",sans-serif; font-weight:700; font-size:40px; color:var(--accent); width:34px; flex:none; text-align:center}
 .hint .body{flex:1}
 .hint .label{font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--muted)}
 .hint .text{font-size:19px; font-weight:800}
@@ -168,7 +168,7 @@ textarea{resize:vertical; min-height:70px}
 .msg{margin-top:12px; font-weight:700; text-align:center; min-height:1.5em}
 .msg.err{color:#C0392B}
 .done-card{text-align:center}
-.done-card .big{font-family:Fredoka,sans-serif; font-size:26px; font-weight:800; margin:4px 0}
+.done-card .big{font-family:Fredoka,"Noto Sans TC",sans-serif; font-size:26px; font-weight:800; margin:4px 0}
 
 /* Board */
 .tally{display:flex; justify-content:space-between; font-weight:800; margin-bottom:8px}
@@ -177,7 +177,7 @@ textarea{resize:vertical; min-height:70px}
 .bar i{display:block; height:100%; transition:width .8s cubic-bezier(.2,.8,.2,1);
   background-image:repeating-linear-gradient(-45deg, rgba(255,255,255,.22) 0 10px, transparent 10px 20px) !important; background-size:28px 28px; animation:stripes 1s linear infinite}
 @keyframes stripes{to{background-position:28px 0}}
-.bar::after{content:"VS"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--card); color:var(--ink); font-family:Fredoka,sans-serif; font-weight:700; font-size:12px; padding:1px 7px; border-radius:999px; box-shadow:var(--shadow)}
+.bar::after{content:"VS"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--card); color:var(--ink); font-family:Fredoka,"Noto Sans TC",sans-serif; font-weight:700; font-size:12px; padding:1px 7px; border-radius:999px; box-shadow:var(--shadow)}
 .bar .bb{background-color:var(--boy)} .bar .gg{background-color:var(--girl)}
 .cols{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px}
 .col h3{font-size:19px; margin-bottom:8px; display:flex; gap:6px; align-items:center}
@@ -196,8 +196,8 @@ textarea{resize:vertical; min-height:70px}
 #reveal{position:fixed; inset:0; display:none; place-items:center; text-align:center; z-index:20; pointer-events:none; padding:16px}
 #reveal.show{display:grid; background:rgba(251,245,236,.86); background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px)}
 #reveal .inner{animation:zoom .7s cubic-bezier(.2,1.4,.4,1) both}
-#reveal .its{font-family:Caveat,cursive; font-size:clamp(40px,9vw,60px); font-weight:700}
-#reveal .word{font-family:Fredoka,sans-serif; font-size:clamp(64px,20vw,150px); font-weight:800; line-height:1; text-shadow:0 6px 0 rgba(0,0,0,.08)}
+#reveal .its{font-family:Caveat,"Noto Sans TC",cursive; font-size:clamp(40px,9vw,60px); font-weight:700}
+#reveal .word{font-family:Fredoka,"Noto Sans TC",sans-serif; font-size:clamp(64px,20vw,150px); font-weight:800; line-height:1; text-shadow:0 6px 0 rgba(0,0,0,.08)}
 #reveal .tagline{font-weight:800; font-size:18px; margin-top:10px}
 #reveal .close{pointer-events:auto; margin-top:22px; background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:10px 18px; font-weight:800}
 @keyframes zoom{from{transform:scale(.2); opacity:0}to{transform:none; opacity:1}}
@@ -205,6 +205,23 @@ textarea{resize:vertical; min-height:70px}
 .revealed-banner{display:none; margin:18px auto 0; text-align:center; padding:14px 18px; border-radius:16px; font-weight:800; font-size:18px}
 .demo{background:#FFF3C4; color:#5B4300; border-radius:12px; padding:10px 14px; font-size:14px; margin:14px 0 0; text-align:center}
 footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
+
+/* Language toggle */
+.lang{position:absolute; top:calc(10px + env(safe-area-inset-top, 0px)); right:calc(10px + env(safe-area-inset-right, 0px)); z-index:5;
+  display:flex; gap:2px; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:3px; box-shadow:var(--shadow)}
+.lang button{border:0; background:transparent; color:var(--muted); font-weight:800; font-size:14px; min-width:52px; min-height:40px; padding:0 12px; border-radius:999px; line-height:1}
+.lang button[aria-pressed=true]{background:linear-gradient(90deg,var(--boy),var(--girl)); color:#fff}
+.lang button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+body{position:relative}
+/* Chinese text: handwriting font has no Chinese glyphs, so size the fallback to match */
+html[lang^="zh"] .eyebrow{font-size:26px; font-weight:900; transform:rotate(-2deg)}
+html[lang^="zh"] h1 .coming{font-size:clamp(22px,5.6vw,30px); font-weight:900; margin-top:6px}
+html[lang^="zh"] h1 .shimmer{font-size:clamp(40px,10vw,68px); font-weight:900}
+html[lang^="zh"] .hint .mystery{font-size:17px; font-weight:700}
+html[lang^="zh"] #reveal .its{font-size:clamp(30px,7vw,44px); font-weight:900}
+html[lang^="zh"] #reveal .word{font-weight:900}
+html[lang^="zh"] .hint .label,html[lang^="zh"] .cd span{letter-spacing:.04em}
+html[lang^="zh"] .sub{line-height:1.75}
 
 @media (max-width:520px){
   .cols{grid-template-columns:1fr}
@@ -221,6 +238,11 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
 
 <div id="bgfx" aria-hidden="true"></div>
 <canvas id="confetti"></canvas>
+
+<div class="lang" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="en" aria-pressed="true">EN</button>
+  <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hant">繁中</button>
+</div>
 
 <div class="wrap">
 
@@ -239,74 +261,158 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
       <path d="M100 10 C 160 10, 192 60, 188 112 C 184 170, 140 220, 104 228 L 96 228 C 60 220, 16 170, 12 112 C 8 60, 40 10, 100 10 Z" fill="url(#shine)"/>
       <path d="M92 228 L 108 228 L 112 238 L 88 238 Z" style="fill:var(--balloon-dark)"/>
       <ellipse cx="62" cy="62" rx="16" ry="26" fill="#fff" opacity=".35" transform="rotate(-25 62 62)"/>
-      <text id="balloonMark" x="100" y="140" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="800" font-size="92" fill="#fff" opacity=".92">?</text>
+      <text id="balloonMark" x="100" y="140" text-anchor="middle" font-family="Fredoka, 'Noto Sans TC', system-ui, sans-serif" font-weight="800" font-size="92" fill="#fff" opacity=".92">?</text>
     </svg>
-    <div class="pop-hint">🎈 Tap anywhere to pop!</div>
+    <div class="pop-hint" id="popHint"></div>
   </div>
 
   <header>
-    <div class="eyebrow"><span class="b">Boy</span> or <span class="g">Girl</span>?</div>
-    <h1><span class="shimmer">Baby Bradley #1</span><span class="coming">is coming <span id="due"></span></span></h1>
+    <div class="eyebrow" data-i18n-html="eyebrow"></div>
+    <h1><span class="shimmer" data-i18n="title"></span><span class="coming" data-i18n="coming"></span></h1>
     <p class="sub" id="intro"></p>
 
     <div id="countdownWrap">
       <div class="countdown" id="countdown"></div>
-      <div class="cd-label" id="cdLabel">until the big reveal</div>
+      <div class="cd-label" id="cdLabel"></div>
     </div>
     <div class="revealed-banner" id="revealedBanner"></div>
-    <div class="demo" id="demoNote" hidden>Demo mode — guesses are saved only in this browser. Add your Google Apps Script URL in the settings at the top of this file to share guesses with everyone.</div>
+    <div class="demo" id="demoNote" data-i18n="demo" hidden></div>
   </header>
 
   <!-- Hints -->
   <section id="hintsSec">
-    <div class="sec-title"><div class="step">1</div><h2>Three hints</h2></div>
+    <div class="sec-title"><div class="step">1</div><h2 data-i18n="hintsTitle"></h2></div>
     <div class="hints" id="hints"></div>
   </section>
 
   <!-- Guess -->
   <section id="guessSec">
-    <div class="sec-title"><div class="step">2</div><h2>Make your guess</h2></div>
+    <div class="sec-title"><div class="step">2</div><h2 data-i18n="guessTitle"></h2></div>
     <div class="card" id="guessCard"></div>
   </section>
 
   <!-- Board -->
   <section id="boardSec">
-    <div class="sec-title"><div class="step">3</div><h2>Everyone's guesses</h2></div>
+    <div class="sec-title"><div class="step">3</div><h2 data-i18n="boardTitle"></h2></div>
     <div class="card">
-      <div class="tally"><span class="b" id="tBoy">💙 Boy · 0</span><span class="g" id="tGirl">0 · Girl 💗</span></div>
+      <div class="tally"><span class="b" id="tBoy"></span><span class="g" id="tGirl"></span></div>
       <div class="bar"><i class="bb" id="barB" style="width:50%"></i><i class="gg" id="barG" style="width:50%"></i></div>
       <div class="cols">
-        <div class="col boy" id="colBoy"><h3>💙 Team Boy</h3><div id="listBoy"></div></div>
-        <div class="col girl" id="colGirl"><h3>💗 Team Girl</h3><div id="listGirl"></div></div>
+        <div class="col boy" id="colBoy"><h3 data-i18n="teamBoy"></h3><div id="listBoy"></div></div>
+        <div class="col girl" id="colGirl"><h3 data-i18n="teamGirl"></h3><div id="listGirl"></div></div>
       </div>
-      <div class="status-line" id="statusLine">Loading guesses…</div>
+      <div class="status-line" id="statusLine" data-i18n="loading"></div>
     </div>
   </section>
 
-  <footer>With love for Julia, Jacob &amp; the little one on the way 🤍</footer>
+  <footer data-i18n="footer"></footer>
 </div>
 
 <div id="reveal" aria-live="assertive">
   <div class="inner">
-    <div class="its">It's a…</div>
+    <div class="its" data-i18n="itsA"></div>
     <div class="word" id="revealWord"></div>
     <div class="tagline" id="revealTag"></div>
-    <button class="close" id="revealClose">See who guessed right</button>
+    <button class="close" id="revealClose" data-i18n="seeWho"></button>
   </div>
 </div>
 
 <script>
 (() => {
   const $ = s => document.querySelector(s);
-  const HINTS = [
-    { label: "How Julia's feeling", tag: "Old wives' tale", icon: "🤢😴", text: "Julia has only mild nausea… but she's VERY exhausted." },
-    { label: "How Julia's feeling", tag: "Old wives' tale", icon: "😬", text: "Julia has been dealing with breakouts!" },
-    { label: "At the doctor's office", tag: "Heartbeat", icon: "💓", text: "Baby's heart rate is over 170 bpm." },
-  ];
+  /* ---------------- Language (English / Traditional Chinese) ---------------- */
+  const I18N = {
+    en: {
+      htmlLang: "en", pageTitle: "Baby Bradley Reveal",
+      eyebrow: '<span class="b">Boy</span> or <span class="g">Girl</span>?',
+      title: "Baby Bradley #1", coming: "is coming May 2027",
+      demo: "Demo mode — guesses are saved only in this browser. Add your Google Apps Script URL in the settings at the top of this file to share guesses with everyone.",
+      hintsTitle: "Three hints", guessTitle: "Make your guess", boardTitle: "Everyone's guesses",
+      teamBoy: "💙 Team Boy", teamGirl: "💗 Team Girl", loading: "Loading guesses…",
+      footer: "With love for Julia, Jacob & the little one on the way 🤍",
+      itsA: "It's a…", seeWho: "See who guessed right",
+      hints: [
+        { label: "How Julia's feeling", tag: "Old wives' tale", text: "Julia has only mild nausea… but she's VERY exhausted." },
+        { label: "How Julia's feeling", tag: "Old wives' tale", text: "Julia has been dealing with breakouts!" },
+        { label: "At the doctor's office", tag: "Heartbeat", text: "Baby's heart rate is over 170 bpm." },
+      ],
+      introBefore: P => `${P} are expecting! Read the clues, cast your guess, and come back on <b>Thanksgiving Day</b> to pop the balloon. 🦃`,
+      introReveal: (P, ready, mine) => `<b>The countdown is over. It's reveal time! 🎉</b> ${P} are expecting, and ${ready ? "the balloon is ready to pop" : "the balloon will be ready to pop any moment"}. ` +
+        (mine ? "Your guess is locked in. Go ahead and pop it! 🎈" : "Haven't guessed yet? There's still time: read the clues and lock in your guess below <b>before</b> you pop the balloon. 🦃🎈"),
+      introAfter: (P, boy) => `${P} are expecting a baby <b>${boy ? "boy! 💙" : "girl! 💗"}</b> Thank you all for guessing along with us. 🦃`,
+      units: ["days", "hours", "mins", "secs"],
+      cdLabel: "until the big reveal on Thanksgiving Day",
+      revealDay: "<b>It's reveal day!</b> The balloon will be ready to pop any moment… 🎈",
+      hintN: n => `Hint ${n}`, mystery: "Top secret clue…", revealHint: "Reveal hint ✨", unlockFirst: n => `🔒 Unlock hint ${n} first`,
+      closed: "Guessing is closed!", youGuessed: boy => `You guessed <b>${boy ? "Boy 💙" : "Girl 💗"}</b>.`, thanks: "Thanks for playing along.",
+      onTeam: (boy, name) => `You're on Team ${boy ? "Boy" : "Girl"}, ${name}!`,
+      readyTap: "The balloon is ready. Tap it to find out if you were right! 🎈",
+      comeBack: "Come back on Thanksgiving Day to pop the balloon and see if you were right.",
+      lockedNote: (n, t) => `🔒 Reveal all three hints to unlock your guess<br><span style="font-weight:600">(${n} of ${t} revealed)</span>`,
+      yourName: "Your name", namePh: "e.g. Aunt Linda", iThink: "I think it's a…", boy: "Boy", girl: "Girl",
+      noteLabel: 'A note for Julia &amp; Jacob <span style="font-weight:600;color:var(--muted)">(optional)</span>',
+      notePh: "Why do you think so? Name ideas? Well wishes?", submit: "Lock in my guess", saving: "Saving…",
+      errName: "Please add your name.", errPick: "Pick Boy or Girl!", errSave: m => `Hmm, that didn't save. Please try again. (${m})`,
+      tallyBoy: (n, pct) => `💙 Boy · ${n}${pct != null ? " (" + pct + "%)" : ""}`,
+      tallyGirl: (n, pct) => `${pct != null ? "(" + pct + "%) " : ""}${n} · Girl 💗`,
+      noGuesses: "No guesses yet",
+      status: (n, demo) => `${n} guess${n === 1 ? "" : "es"} so far${demo ? " (demo)" : ""} · updates automatically`,
+      beFirst: "Be the first to guess!", loadFail: "Couldn't load guesses right now. Retrying soon…",
+      banner: (boy, w, n) => `It's a ${boy ? "Boy! 💙" : "Girl! 💗"} &nbsp;·&nbsp; ${w} of ${n} guessed right`,
+      word: boy => boy ? "BOY!" : "GIRL!",
+      tagline: "Congratulations, Julia & Jacob! Baby Bradley arrives May 2027.",
+      popAny: "🎈 Tap anywhere to pop!", popGuessFirst: "🎈 Guess below first, then tap here to pop!",
+      balloonMystery: "Mystery balloon", balloonAgain: "Tap to pop again",
+    },
+    zh: {
+      htmlLang: "zh-Hant", pageTitle: "Bradley 家寶寶性別揭曉",
+      eyebrow: '是<span class="b">男生</span>還是<span class="g">女生</span>？',
+      title: "Bradley 家寶寶 #1", coming: "即將在 2027 年 5 月報到",
+      demo: "示範模式：猜測只會存在這個瀏覽器裡。請在檔案最上方的設定中加入 Google Apps Script 網址，才能和大家分享猜測。",
+      hintsTitle: "三個提示", guessTitle: "你的猜測", boardTitle: "大家的猜測",
+      teamBoy: "💙 男生隊", teamGirl: "💗 女生隊", loading: "正在載入猜測…",
+      footer: "獻給 Julia、Jacob 和即將到來的小寶貝 🤍",
+      itsA: "寶寶是…", seeWho: "看看誰猜對了",
+      hints: [
+        { label: "Julia 的近況", tag: "老一輩的說法", text: "Julia 只有輕微孕吐……但是超級累！" },
+        { label: "Julia 的近況", tag: "老一輩的說法", text: "Julia 最近一直冒痘痘！" },
+        { label: "產檢的時候", tag: "胎心音", text: "寶寶的心跳每分鐘超過 170 下。" },
+      ],
+      introBefore: P => `${P} 要當爸媽了！看看線索、投下你的猜測，並在<b>感恩節當天</b>回來戳破氣球。🦃`,
+      introReveal: (P, ready, mine) => `<b>倒數結束，揭曉時刻到了！🎉</b> ${P} 的寶寶就要揭曉，${ready ? "氣球已經可以戳破了" : "氣球隨時就能戳破了"}。` +
+        (mine ? "你的猜測已經送出，快去戳破氣球吧！🎈" : "還沒猜嗎？還來得及！看完線索並在下方送出你的猜測，<b>然後</b>再戳破氣球。🦃🎈"),
+      introAfter: (P, boy) => `${P} 的寶寶是<b>${boy ? "男生！💙" : "女生！💗"}</b> 謝謝大家陪我們一起猜！🦃`,
+      units: ["天", "小時", "分", "秒"],
+      cdLabel: "距離感恩節大揭曉",
+      revealDay: "<b>揭曉日到了！</b>氣球隨時可以戳破… 🎈",
+      hintN: n => `提示 ${n}`, mystery: "神秘線索…", revealHint: "揭開提示 ✨", unlockFirst: n => `🔒 請先揭開提示 ${n}`,
+      closed: "猜測已經截止！", youGuessed: boy => `你猜的是<b>${boy ? "男生 💙" : "女生 💗"}</b>。`, thanks: "謝謝你一起同樂！",
+      onTeam: (boy, name) => `${name}，你是${boy ? "男生" : "女生"}隊！`,
+      readyTap: "氣球準備好了，點一下看看你猜對了沒！🎈",
+      comeBack: "感恩節當天回來戳破氣球，看看你猜對了沒！",
+      lockedNote: (n, t) => `🔒 揭開三個提示後就能猜囉<br><span style="font-weight:600">（已揭開 ${n} / ${t}）</span>`,
+      yourName: "你的名字", namePh: "例如：Linda 阿姨", iThink: "我猜是…", boy: "男生", girl: "女生",
+      noteLabel: '想對 Julia 和 Jacob 說的話 <span style="font-weight:600;color:var(--muted)">（選填）</span>',
+      notePh: "為什麼這樣猜？取名建議？祝福的話？", submit: "送出我的猜測", saving: "儲存中…",
+      errName: "請輸入你的名字。", errPick: "請選擇男生或女生！", errSave: m => `糟糕，沒有儲存成功，請再試一次。（${m}）`,
+      tallyBoy: (n, pct) => `💙 男生 · ${n}${pct != null ? "（" + pct + "%）" : ""}`,
+      tallyGirl: (n, pct) => `${pct != null ? "（" + pct + "%）" : ""}${n} · 女生 💗`,
+      noGuesses: "還沒有人猜",
+      status: (n, demo) => `目前共 ${n} 人猜${demo ? "（示範）" : ""} · 自動更新`,
+      beFirst: "搶先當第一個猜的人！", loadFail: "目前無法載入猜測，稍後會自動重試…",
+      banner: (boy, w, n) => `是${boy ? "男生！💙" : "女生！💗"} &nbsp;·&nbsp; ${n} 人中有 ${w} 人猜對`,
+      word: boy => boy ? "男生！" : "女生！",
+      tagline: "恭喜 Julia 和 Jacob！Bradley 家寶寶將在 2027 年 5 月報到。",
+      popAny: "🎈 點任何地方戳破氣球！", popGuessFirst: "🎈 先在下方猜，再點這裡戳破！",
+      balloonMystery: "神秘氣球", balloonAgain: "再點一次戳破氣球",
+    },
+  };
+  const HINT_ICONS = ["🤢😴", "😬", "💓"];
+  const HINT_COUNT = HINT_ICONS.length;
   const qs = new URLSearchParams(location.search);
   const PREVIEW = (qs.get("preview") || "").toLowerCase();   // ?preview=boy or ?preview=girl to test the pop
   const DEMO = !CONFIG.SCRIPT_URL;
-  const LS = { hints: "bb1_hints", mine: "bb1_myguess", demo: "bb1_demo_guesses", popped: "bb1_popped" };
+  const LS = { hints: "bb1_hints", mine: "bb1_myguess", demo: "bb1_demo_guesses", popped: "bb1_popped", lang: "bb1_lang" };
   const mem = {}; // in-memory fallback when browser storage is blocked
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); if (v != null) return JSON.parse(v); } catch {} return k in mem ? mem[k] : d; },
@@ -314,8 +420,48 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
   };
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 
-  $("#due").textContent = CONFIG.DUE;
   if (DEMO) $("#demoNote").hidden = false;
+
+  // Language: ?lang=zh or ?lang=en in the link wins, then the guest's last choice,
+  // then their phone/browser language (Traditional Chinese settings start in 繁中).
+  function initialLang() {
+    const q = (qs.get("lang") || "").toLowerCase();
+    if (q.startsWith("zh")) return "zh";
+    if (q.startsWith("en")) return "en";
+    const saved = store.get(LS.lang, null);
+    if (saved === "en" || saved === "zh") return saved;
+    const langs = (navigator.languages || [navigator.language || ""]).map(l => String(l).toLowerCase());
+    for (const l of langs) {            // go by the guest's first-choice language
+      if (l.startsWith("en")) return "en";
+      if (l.startsWith("zh")) return "zh";
+    }
+    return "en";
+  }
+  let lang = initialLang();
+  const L = () => I18N[lang];
+  const parentsName = () => esc(lang === "zh" ? CONFIG.PARENTS.replace(/\s+and\s+/i, " 和 ") : CONFIG.PARENTS);
+
+  function applyStatic() {
+    const t = L();
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = t[el.dataset.i18nHtml]; });
+    document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  }
+  function setLang(next) {
+    if (next === lang) return;
+    lang = next;
+    store.set(LS.lang, lang);
+    applyStatic();
+    hintsKey = "";
+    renderHints(); renderGuess(true); renderBoard(); renderRevealState(); tickCountdown(); updatePopHint();
+    if ($("#reveal").classList.contains("show")) {
+      $("#revealWord").textContent = L().word(state.gender === "boy");
+      $("#revealTag").textContent = L().tagline;
+    }
+  }
+  document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); setLang(b.dataset.lang); }));
 
   let state = { guesses: [], revealed: false, gender: "", revealAt: CONFIG.REVEAL_AT };
   let hintsOpen = store.get(LS.hints, 0);
@@ -356,16 +502,11 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
 
   /* ---------------- Countdown ---------------- */
   function updateIntro(timeUp) {
-    const P = esc(CONFIG.PARENTS);
+    const P = parentsName(), t = L();
     let html;
-    if (state.revealed && popped) {
-      html = `${P} are expecting a baby <b>${state.gender === "boy" ? "boy! 💙" : "girl! 💗"}</b> Thank you all for guessing along with us. 🦃`;
-    } else if (state.revealed || timeUp) {
-      html = `<b>The countdown is over. It's reveal time! 🎉</b> ${P} are expecting, and ${state.revealed ? "the balloon is ready to pop" : "the balloon will be ready to pop any moment"}. ` +
-        (store.get(LS.mine, null) ? "Your guess is locked in. Go ahead and pop it! 🎈" : "Haven't guessed yet? There's still time: read the clues and lock in your guess below <b>before</b> you pop the balloon. 🦃🎈");
-    } else {
-      html = `${P} are expecting! Read the clues, cast your guess, and come back on <b>Thanksgiving Day</b> to pop the balloon. 🦃`;
-    }
+    if (state.revealed && popped) html = t.introAfter(P, state.gender === "boy");
+    else if (state.revealed || timeUp) html = t.introReveal(P, state.revealed, !!store.get(LS.mine, null));
+    else html = t.introBefore(P);
     const el = $("#intro");
     if (el.innerHTML !== html) el.innerHTML = html;
   }
@@ -379,13 +520,14 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
     wrap.hidden = false;
     if (isNaN(target) || diff <= 0) {
       $("#countdown").innerHTML = "";
-      $("#cdLabel").innerHTML = "<b>It's reveal day!</b> The balloon will be ready to pop any moment… 🎈";
+      if ($("#cdLabel").innerHTML !== L().revealDay) $("#cdLabel").innerHTML = L().revealDay;
       return;
     }
     const d = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60, s = Math.floor(diff / 1e3) % 60;
-    $("#countdown").innerHTML = [[d,"days"],[h,"hours"],[m,"mins"],[s,"secs"]]
+    const u = L().units;
+    $("#countdown").innerHTML = [[d,u[0]],[h,u[1]],[m,u[2]],[s,u[3]]]
       .map(([v,l]) => `<div class="cd"><b>${String(v).padStart(2,"0")}</b><span>${l}</span></div>`).join("");
-    $("#cdLabel").textContent = "until the big reveal on Thanksgiving Day";
+    $("#cdLabel").textContent = L().cdLabel;
   }
 
   /* ---------------- Hints ---------------- */
@@ -394,17 +536,18 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
     const key = hintsOpen + "|" + (state.revealed && popped);
     if (key === hintsKey) return;
     hintsKey = key;
-    $("#hints").innerHTML = HINTS.map((h, i) => {
+    const t = L();
+    $("#hints").innerHTML = t.hints.map((h, i) => {
       const open = i < hintsOpen || (state.revealed && popped);
       const cls = open ? "open" : (i === hintsOpen ? "locked next" : "locked");
       return `<div class="hint ${cls}" data-i="${i}">
         <div class="num">${i + 1}</div>
         <div class="body">
-          <div class="label">Hint ${i + 1}${open ? " · " + esc(h.label) : ""}</div>${open ? `<span class="tag">${esc(h.tag)}</span>` : `<div class="mystery">Top secret clue…</div>`}
+          <div class="label">${t.hintN(i + 1)}${open ? " · " + esc(h.label) : ""}</div>${open ? `<span class="tag">${esc(h.tag)}</span>` : `<div class="mystery">${t.mystery}</div>`}
           <div class="text">${esc(h.text)}</div>
-          <button class="reveal-btn" data-i="${i}" ${i === hintsOpen ? "" : "disabled"}>${i === hintsOpen ? "Reveal hint ✨" : "🔒 Unlock hint " + i + " first"}</button>
+          <button class="reveal-btn" data-i="${i}" ${i === hintsOpen ? "" : "disabled"}>${i === hintsOpen ? t.revealHint : t.unlockFirst(i)}</button>
         </div>
-        <div class="icon">${h.icon}</div>
+        <div class="icon">${HINT_ICONS[i]}</div>
       </div>`;
     }).join("");
     $("#hints").querySelectorAll(".reveal-btn").forEach(b => b.onclick = e => {
@@ -418,38 +561,42 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
   }
 
   /* ---------------- Guess form ---------------- */
-  function renderGuess() {
-    const card = $("#guessCard");
+  function renderGuess(force) {
+    const card = $("#guessCard"), t = L();
     const mine = store.get(LS.mine, null);
     if (state.revealed && popped) {
-      card.innerHTML = `<div class="done-card"><div class="big">Guessing is closed!</div>
-        <div>${mine ? `You guessed <b>${mine.guess === "boy" ? "Boy 💙" : "Girl 💗"}</b>.` : "Thanks for playing along."}</div></div>`;
+      card.innerHTML = `<div class="done-card"><div class="big">${t.closed}</div>
+        <div>${mine ? t.youGuessed(mine.guess === "boy") : t.thanks}</div></div>`;
       return;
     }
     if (mine) {
       card.innerHTML = `<div class="done-card"><div style="font-size:40px">${mine.guess === "boy" ? "💙" : "💗"}</div>
-        <div class="big">You're on Team ${mine.guess === "boy" ? "Boy" : "Girl"}, ${esc(mine.name)}!</div>
-        <div style="color:var(--muted)">${state.revealed ? "The balloon is ready. Tap it to find out if you were right! 🎈" : "Come back on Thanksgiving Day to pop the balloon and see if you were right."}</div></div>`;
+        <div class="big">${t.onTeam(mine.guess === "boy", esc(mine.name))}</div>
+        <div style="color:var(--muted)">${state.revealed ? t.readyTap : t.comeBack}</div></div>`;
       return;
     }
-    if (hintsOpen < HINTS.length) {
-      card.innerHTML = `<div class="locked-note">🔒 Reveal all three hints to unlock your guess<br><span style="font-weight:600">(${hintsOpen} of ${HINTS.length} revealed)</span></div>`;
+    if (hintsOpen < HINT_COUNT) {
+      card.innerHTML = `<div class="locked-note">${t.lockedNote(hintsOpen, HINT_COUNT)}</div>`;
       return;
     }
-    if ($("#gform")) return; // keep whatever the guest has typed/picked so far
+    const old = $("#gform");
+    if (old && !force) return; // keep whatever the guest has typed/picked so far
+    if (old && $("#gsubmit").disabled) return; // don't interrupt a save in progress
+    const keepName = old ? $("#gname").value : "", keepNote = old ? $("#gnote").value : "";
     card.innerHTML = `<form id="gform" novalidate>
-      <div class="field"><label for="gname">Your name</label>
-        <input type="text" id="gname" maxlength="60" placeholder="e.g. Aunt Linda" autocomplete="name" required></div>
-      <div class="field"><label>I think it's a…</label>
+      <div class="field"><label for="gname">${t.yourName}</label>
+        <input type="text" id="gname" maxlength="60" placeholder="${esc(t.namePh)}" autocomplete="name" required></div>
+      <div class="field"><label>${t.iThink}</label>
         <div class="picks">
-          <button type="button" class="pick boy" data-v="boy" aria-pressed="false"><span class="e">💙</span>Boy</button>
-          <button type="button" class="pick girl" data-v="girl" aria-pressed="false"><span class="e">💗</span>Girl</button>
+          <button type="button" class="pick boy" data-v="boy" aria-pressed="${pick === "boy"}"><span class="e">💙</span>${t.boy}</button>
+          <button type="button" class="pick girl" data-v="girl" aria-pressed="${pick === "girl"}"><span class="e">💗</span>${t.girl}</button>
         </div></div>
-      <div class="field"><label for="gnote">A note for Julia &amp; Jacob <span style="font-weight:600;color:var(--muted)">(optional)</span></label>
-        <textarea id="gnote" maxlength="240" placeholder="Why do you think so? Name ideas? Well wishes?"></textarea></div>
-      <button class="submit" id="gsubmit" type="submit">Lock in my guess</button>
+      <div class="field"><label for="gnote">${t.noteLabel}</label>
+        <textarea id="gnote" maxlength="240" placeholder="${esc(t.notePh)}"></textarea></div>
+      <button class="submit" id="gsubmit" type="submit">${t.submit}</button>
       <div class="msg" id="gmsg"></div>
     </form>`;
+    $("#gname").value = keepName; $("#gnote").value = keepNote;
     card.querySelectorAll(".pick").forEach(b => b.onclick = () => {
       pick = b.dataset.v;
       card.querySelectorAll(".pick").forEach(x => x.setAttribute("aria-pressed", x === b));
@@ -458,17 +605,18 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
       e.preventDefault();
       const name = $("#gname").value.trim(), note = $("#gnote").value.trim(), msg = $("#gmsg");
       msg.className = "msg err";
-      if (!name) { msg.textContent = "Please add your name."; return; }
-      if (!pick) { msg.textContent = "Pick Boy or Girl!"; return; }
-      const btn = $("#gsubmit"); btn.disabled = true; btn.textContent = "Saving…"; msg.textContent = "";
+      if (!name) { msg.textContent = L().errName; return; }
+      if (!pick) { msg.textContent = L().errPick; return; }
+      const btn = $("#gsubmit"); btn.disabled = true; btn.textContent = L().saving; msg.textContent = "";
       try {
         await submitGuess({ name, guess: pick, note });
         store.set(LS.mine, { name, guess: pick });
         await refresh();
         miniBurst(pick);
       } catch (err) {
-        msg.textContent = "Hmm, that didn't save. Please try again. (" + err.message + ")";
-        btn.disabled = false; btn.textContent = "Lock in my guess";
+        const m = $("#gmsg"), b2 = $("#gsubmit");
+        if (m) m.textContent = L().errSave(err.message);
+        if (b2) { b2.disabled = false; b2.textContent = L().submit; }
       }
     };
   }
@@ -480,18 +628,17 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
     const total = boys.length + girls.length;
     const pb = total ? Math.round(boys.length / total * 100) : 50;
     $("#barB").style.width = pb + "%"; $("#barG").style.width = (100 - pb) + "%";
-    $("#tBoy").textContent = `💙 Boy · ${boys.length}${total ? " (" + pb + "%)" : ""}`;
-    $("#tGirl").textContent = `${total ? "(" + (100 - pb) + "%) " : ""}${girls.length} · Girl 💗`;
+    const t = L();
+    $("#tBoy").textContent = t.tallyBoy(boys.length, total ? pb : null);
+    $("#tGirl").textContent = t.tallyGirl(girls.length, total ? 100 - pb : null);
     const showWin = state.revealed && popped;
     const item = (g, team) => `<div class="guess ${showWin && state.gender === team ? "winner" : ""}">
       <div class="n">${esc(g.name)}</div>${g.note ? `<div class="note">“${esc(g.note)}”</div>` : ""}</div>`;
-    $("#listBoy").innerHTML = boys.map(g => item(g, "boy")).join("") || `<div class="empty">No guesses yet</div>`;
-    $("#listGirl").innerHTML = girls.map(g => item(g, "girl")).join("") || `<div class="empty">No guesses yet</div>`;
+    $("#listBoy").innerHTML = boys.map(g => item(g, "boy")).join("") || `<div class="empty">${t.noGuesses}</div>`;
+    $("#listGirl").innerHTML = girls.map(g => item(g, "girl")).join("") || `<div class="empty">${t.noGuesses}</div>`;
     $("#colBoy").classList.toggle("dim", showWin && state.gender !== "boy");
     $("#colGirl").classList.toggle("dim", showWin && state.gender !== "girl");
-    $("#statusLine").textContent = total
-      ? `${total} guess${total === 1 ? "" : "es"} so far${DEMO ? " (demo)" : ""} · updates automatically`
-      : "Be the first to guess!";
+    $("#statusLine").textContent = loadFailed ? t.loadFail : total ? t.status(total, DEMO) : t.beFirst;
   }
 
   /* ---------------- Reveal / pop ---------------- */
@@ -505,14 +652,14 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
       document.documentElement.style.setProperty("--balloon", boyC ? "#8EC1EE" : "#F4A6C0");
       document.documentElement.style.setProperty("--balloon-dark", boyC ? "#5E9BD6" : "#E07A9B");
       $("#balloonMark").textContent = "♥";
-      $("#balloon").setAttribute("aria-label", "Tap to pop again");
+      $("#balloon").setAttribute("aria-label", L().balloonAgain);
       const boy = state.gender === "boy";
       ban.style.display = "block";
       ban.style.background = boy ? "var(--boy-soft)" : "var(--girl-soft)";
       ban.style.color = boy ? "var(--boy)" : "var(--girl)";
       const winners = state.guesses.filter(g => g.guess === state.gender).length;
-      ban.innerHTML = `It's a ${boy ? "Boy! 💙" : "Girl! 💗"} &nbsp;·&nbsp; ${winners} of ${state.guesses.length} guessed right`;
-    } else ban.style.display = "none";
+      ban.innerHTML = L().banner(boy, winners, state.guesses.length);
+    } else { ban.style.display = "none"; $("#balloon").setAttribute("aria-label", L().balloonMystery); }
   }
 
   function pop() {
@@ -528,11 +675,11 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
       const boy = state.gender === "boy";
       burst(r.left + r.width / 2, r.top + r.height * 0.35, 260, boy);
       rain(boy);
-      $("#revealWord").textContent = boy ? "BOY!" : "GIRL!";
+      $("#revealWord").textContent = L().word(boy);
       $("#revealWord").style.color = boy ? "var(--boy)" : "var(--girl)";
-      $("#revealTag").textContent = `Congratulations, Julia & Jacob! Baby Bradley arrives ${CONFIG.DUE}.`;
+      $("#revealTag").textContent = L().tagline;
       $("#reveal").classList.add("show");
-      renderRevealState(); renderBoard(); renderHints(); renderGuess(); updateIntro(true);
+      renderRevealState(); renderBoard(); renderHints(); renderGuess(); updateIntro(true); updatePopHint();
       setTimeout(() => { b.classList.remove("popping", "gone"); b.style.opacity = 1; }, 4500);
     }, 220);
   }
@@ -625,15 +772,17 @@ footer{margin-top:48px; text-align:center; color:var(--muted); font-size:14px}
   })();
 
   /* ---------------- Boot ---------------- */
+  let loadFailed = false;
+  function updatePopHint() { $("#popHint").textContent = store.get(LS.mine, null) ? L().popAny : L().popGuessFirst; }
   async function refresh() {
-    let failed = null;
+    loadFailed = false;
     try { await load(); }
-    catch (err) { failed = err; console.error("Loading guesses failed:", err); }
+    catch (err) { loadFailed = true; console.error("Loading guesses failed:", err); }
     if (state.revealed && !PREVIEW && store.get(LS.popped, false)) popped = true;
-    renderHints(); renderGuess(); renderBoard(); renderRevealState(); tickCountdown();
-    $(".pop-hint").textContent = store.get(LS.mine, null) ? "🎈 Tap anywhere to pop!" : "🎈 Guess below first, then tap here to pop!";
-    if (failed) $("#statusLine").textContent = "Couldn't load guesses right now. Retrying soon…";
+    renderHints(); renderGuess(); renderBoard(); renderRevealState(); tickCountdown(); updatePopHint();
   }
+  applyStatic();
+  updatePopHint();
   tickCountdown();
   refresh();
   setInterval(tickCountdown, 1000);
